@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Canvas, Circle, Group } from "@shopify/react-native-skia";
 
-export default function App() {
+const App = () => {
+  const width = 256;
+  const height = 256;
+  const r = width * 0.33;
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Canvas style={{ width, height }}>
+      <Group blendMode="multiply">
+        <Circle cx={r} cy={r} r={r} color="cyan" />
+        <Circle cx={width - r} cy={r} r={r} color="magenta" />
+        <Circle cx={width / 2} cy={width - r} r={r} color="yellow" />
+      </Group>
+    </Canvas>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
