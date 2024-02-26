@@ -19,17 +19,25 @@ const App = () => {
 
   const x = useSharedValue(width);
 
+  const birdY = useSharedValue(height / 2);
+
   useEffect(() => {
     x.value = withRepeat(
       withSequence(
-      withTiming(-150, { duration: 3000, easing: Easing.linear }),
-      withTiming(width, { duration: 0 }),
-    ),
+        withTiming(width, { duration: 0 }),
+        withTiming(-150, {
+          duration: 3000,
+          easing: Easing.linear,
+        }),
+        withTiming(width, { duration: 0 })
+      ),
       -1
-    )
-  }, [])
+    );
 
-  const pipeOffset = 0
+
+  }, []);
+
+  const pipeOffset = 0;
 
 
   const r = width * 0.33;
@@ -66,7 +74,7 @@ const App = () => {
       <Image
         image={bird}
         x={width / 4}
-        y={height / 2}
+        y={birdY}
         width={64}
         height={48}
       />
