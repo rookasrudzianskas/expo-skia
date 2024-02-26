@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Platform, useWindowDimensions } from 'react-native';
 import {
   Canvas,
@@ -8,6 +8,7 @@ import {
   Text,
   matchFont,
 } from '@shopify/react-native-skia';
+import {Easing, useSharedValue, withRepeat, withSequence, withTiming} from "react-native-reanimated";
 const App = () => {
   const { width, height } = useWindowDimensions();
   const bg = useImage(require('./assets/sprites/background-day.png'));
@@ -15,6 +16,18 @@ const App = () => {
   const pipeBottom = useImage(require('./assets/sprites/pipe-green.png'));
   const pipeTop = useImage(require('./assets/sprites/pipe-green-top.png'));
   const base = useImage(require('./assets/sprites/base.png'));
+
+  const x = useSharedValue(width);
+
+  useEffect(() => {
+    x.value = withRepeat(
+      withSequence(
+      withTiming(-150, { duration: 3000, easing: Easing.linear }),
+      withTiming(width, { duration: 0 }),
+    ),
+      -1
+    )
+  }, [])
 
   const pipeOffset = 0
 
@@ -29,14 +42,14 @@ const App = () => {
       <Image
         image={pipeTop}
         y={pipeOffset - 320}
-        x={width / 2}
+        x={x}
         width={103}
         height={640}
       />
       <Image
         image={pipeBottom}
         y={height - 320 + pipeOffset}
-        x={width / 2}
+        x={x}
         width={103}
         height={640}
       />
