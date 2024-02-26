@@ -249,6 +249,7 @@ const App = () => {
             <Image image={bird} y={birdY} x={birdX} width={64} height={48} />
           </Group>
 
+
           {/* Sim */}
           {/* <Circle cy={birdCenterY} cx={birdCenterX} r={15} color={'red'} /> */}
 
